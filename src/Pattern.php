@@ -34,6 +34,7 @@ class Pattern
         $words = Posseg::cut($sentense);
         $result = [];
         foreach($words as $word) {
+            //@TODO: 1月 2月 tag为m
             if (data_get($word, 'tag') != 't'){
                 continue;
             }
