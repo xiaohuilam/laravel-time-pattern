@@ -22,16 +22,16 @@ class Pattern
     /**
      * 分词后分析
      *
-     * @param string $sentense
+     * @param string $sentence
      */
-    public static function parse($sentense)
+    public static function parse($sentence)
     {
         ini_set('memory_limit', -1);
         $t1 = microtime(true);
         Jieba::init(array('dict'=>'small'));
         //Finalseg::init();
         Posseg::init();
-        $words = Posseg::cut($sentense);
+        $words = Posseg::cut($sentence);
         $result = [];
         foreach($words as $word) {
             //@TODO: 1月 2月 tag为m
@@ -44,7 +44,7 @@ class Pattern
         return $result;
     }
 
-    public static function try($sentense)
+    public static function try($sentence)
     {
         /**
          * @var ResultObject[]
@@ -55,7 +55,7 @@ class Pattern
              * @var RuleInterface $rule
              */
             $rule = new $rule_class;
-            $results = array_merge($results, $rule->try($sentense));
+            $results = array_merge($results, $rule->try($sentence));
         }
 
         return $results;
