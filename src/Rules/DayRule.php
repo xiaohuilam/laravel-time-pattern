@@ -12,27 +12,29 @@ class DayRule
      * @var array
      */
     protected $parterns = [
-        '/^今天$/i' => ['today'],
-        '/^今日$/i' => ['today'],
-        '/^today$/i' => ['today'],
-        '/^tonight$/i' => ['today'],
-        '/^this day$/i' => ['today'],
-        '/^this night$/i' => ['today'],
-        '/^the day before tomorrow$/i' => ['today'],
-        '/^大前天$/i' => ['-3day'],
-        '/^前天$/i' => ['-2day'],
-        '/^the day before lastday$/i' => ['-2day'],
-        '/^the day before yesterday$/i' => ['-2day'],
-        '/^the day before last night$/i' => ['-2day'],
-        '/^昨天$/i' => ['-1day'],
-        '/^昨日$/i' => ['-1day'],
-        '/^tomorrow$/i' => ['-1day'],
-        '/^lastday$/i' => ['-1day'],
-        '/^last night$/i' => ['-1day'],
-        '/^tomorrow$/i' => ['+1day'],
-        '/^next day$/i' => ['+1day'],
-        '/^the day after tomorrow$/i' => ['+2day'],
-        '/^the day after next day$/i' => ['+2day'],
+        '/今天/i' => ['today'],
+        '/今日/i' => ['today'],
+        '/today/i' => ['today'],
+        '/tonight/i' => ['today'],
+        '/this day/i' => ['today'],
+        '/this night/i' => ['today'],
+        '/the day before tomorrow/i' => ['today'],
+        '/大前天/i' => ['-3 days'],
+        '/前天/i' => ['-2 days'],
+        '/the day before lastday/i' => ['-2 days'],
+        '/the day before yesterday/i' => ['-2 days'],
+        '/the day before last night/i' => ['-2 days'],
+        '/昨天/i' => ['-1 days'],
+        '/昨日/i' => ['-1 days'],
+        '/yesterday/i' => ['-1 days'],
+        '/lastday/i' => ['-1 days'],
+        '/last night/i' => ['-1 days'],
+        '/明天/i' => ['+1 days'],
+        '/明日/i' => ['+1 days'],
+        '/tomorrow/i' => ['+1 days'],
+        '/next day/i' => ['+1 days'],
+        '/the day after tomorrow/i' => ['+2 days'],
+        '/the day after next day/i' => ['+2 days'],
     ];
 
     /**
@@ -53,8 +55,9 @@ class DayRule
                 continue;
             } else {
                 $mat = new ResultObject();
-                $mat->setFromDay(Carbon::today()->day);
-                $mat->setToDay(Carbon::today()->day);
+                $carbon = Carbon::parse($matches_into[0]);
+                $mat->setFromCarbon($carbon->copy());
+                $mat->setToCarbon($carbon->copy());
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

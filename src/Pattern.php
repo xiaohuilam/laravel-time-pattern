@@ -3,8 +3,11 @@ namespace Xiaohuilam\LaravelTimePattern;
 
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
+use Fukuball\Jieba\Jieba;
+use Fukuball\Jieba\Finalseg;
+use Fukuball\Jieba\Posseg;
 
-class Partern
+class Pattern
 {
     /**
      * @var RuleInterface[]
@@ -15,6 +18,30 @@ class Partern
         Rules\MonthRule::class,
         Rules\DayRule::class,
     ];
+
+    /**
+     * 分词后分析
+     *
+     * @param string $sentense
+     */
+    public static function parse($sentense)
+    {
+        ini_set('memory_limit', -1);
+        $t1 = microtime(true);
+        Jieba::init(array('dict'=>'small'));
+        //Finalseg::init();
+        Posseg::init();
+        $words = Posseg::cut($sentense);
+        $result = [];
+        foreach($words as $word) {
+            if (data_get($word, 'tag') != 't'){
+                continue;
+            }
+            $string = $word['word'];
+            $result[$string] = self::try($string);
+        }
+        return $result;
+    }
 
     public static function try($sentense)
     {

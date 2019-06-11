@@ -12,13 +12,13 @@ class WeekRule
      * @var array
      */
     protected $parterns = [
-        '/^本周$/i' => ['this week'],
-        '/^上周$/i' => ['-1 week'],
-        '/^下周$/i' => ['+1 week'],
-        '/^this week$/i' => ['this week'],
-        '/^last week$/i' => ['-1 week'],
-        '/^previous week$/i' => ['-1 week'],
-        '/^next week$/i' => ['+1 week'],
+        '/本周/i' => ['this week'],
+        '/上周/i' => ['-1 week'],
+        '/下周/i' => ['+1 week'],
+        '/this week/i' => ['this week'],
+        '/last week/i' => ['-1 week'],
+        '/previous week/i' => ['-1 week'],
+        '/next week/i' => ['+1 week'],
     ];
 
     /**
