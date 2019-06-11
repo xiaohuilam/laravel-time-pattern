@@ -13,7 +13,7 @@ dump(Pattern::try('这个月'));
 dump(Pattern::try('本月'));
 dump(Pattern::try('月初'));
 dump(Pattern::try('月底'));
-dd(Pattern::try('上旬'));
+dump(Pattern::try('上旬'));
 dump(Pattern::try('下旬'));
 dump(Pattern::try('一月'));
 dump(Pattern::try('二月'));

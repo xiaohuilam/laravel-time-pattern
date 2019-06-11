@@ -35,7 +35,7 @@ class StandardRule
     public function try($sentense)
     {
         /**
-         * @var $results \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
+         * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results
          */
         $results = [];
         foreach ($this->parterns as $regex => $matches_into) {
