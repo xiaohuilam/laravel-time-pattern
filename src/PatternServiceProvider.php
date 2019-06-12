@@ -20,7 +20,7 @@ class PatternServiceProvider extends ServiceProvider
 
     protected function publishConfig()
     {
-        $this->publishableGroups([
+        $this->publishes([
             self::CONFIG => config_path('nlp_time_pattern.php'),
         ], 'time-pattern');
     }
