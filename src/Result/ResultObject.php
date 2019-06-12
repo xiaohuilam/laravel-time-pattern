@@ -94,7 +94,7 @@ class ResultObject
      *
      * @return string
      */
-    public function getFromDatetime)
+    public function getFromDatetime()
     {
         return implode(' ', [
             implode('-', [$this->from_year, $this->from_month, $this->from_day,]),
@@ -107,7 +107,7 @@ class ResultObject
      *
      * @return string
      */
-    public function getToDatetime)
+    public function getToDatetime()
     {
         return implode(' ', [
             implode('-', [$this->to_year, $this->to_month, $this->to_day,]),
