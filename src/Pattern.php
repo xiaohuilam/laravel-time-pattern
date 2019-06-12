@@ -14,21 +14,23 @@ class Pattern
         Rules\SubMonthRule::class,
         Rules\MonthRule::class,
         Rules\DayRule::class,
+        Rules\WeekRule::class,
+        Rules\SubDayRule::class,
     ];
 
     /**
      * 分词后分析
      *
      * @param string $sentence
+     * @param bool $greedy 贪婪模式
      */
-    public static function parse($sentence)
+    public static function parse($sentence, $greedy = true)
     {
         $words = collect([]);
         foreach (config('nlp_time_pattern.participles') as $participle) {
             $results = call_user_func([$participle, 'parts'], $sentence);
             $words = $words->merge($results);
         }
-        $words = $words->unique();
 
         $stacks = [];
 
