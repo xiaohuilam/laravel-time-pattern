@@ -3,7 +3,7 @@ namespace Xiaohuilam\LaravelTimePattern;
 
 use Illuminate\Support\ServiceProvider;
 
-class PatterServiceProvider extends ServiceProvider
+class PatternServiceProvider extends ServiceProvider
 {
     const CONFIG = __DIR__ . '/config/nlp_time_pattern.php';
 

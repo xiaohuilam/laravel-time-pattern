@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Xiaohuilam\\LaravelTimePattern\\PatterServiceProvider"
+                "Xiaohuilam\\LaravelTimePattern\\PatternServiceProvider"
             ]
         }
     }
