@@ -28,26 +28,12 @@ class Pattern
     {
         $words = collect([]);
         foreach (config('nlp_time_pattern.participles') as $participle) {
-            $results = call_user_func([$participle, 'parts'], $sentence);
+            $results = call_user_func([$participle, 'run'], $sentence);
             $words = $words->merge($results);
         }
+        $words = collect($words)->where('tag', 't')->values();
 
-        $stacks = [];
-
-        foreach($words as $word) {
-            $need_parse = false;
-            //@TODO: 1月 2月 tag为m
-            if (data_get($word, 'tag') == 't'){
-                $need_parse = true;
-            } else if (data_get($word, 'tag') == 't') {
-                $need_parse = true;
-            }
-            if (!$need_parse) {
-                continue;
-            }
-
-            $stacks[] = $word['word'];
-        }
+        $stacks = $words->pluck('word')->values();
         $result = [];
         foreach ($stacks as $stack) {
             $result[$stack] = self::try($stack);

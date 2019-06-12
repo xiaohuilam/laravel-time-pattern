@@ -8,7 +8,7 @@ use Fukuball\Jieba\Posseg;
 /**
  * 结巴分词 本地
  */
-class JiebaParticiple implements ParticipleInterface
+class JiebaParticiple extends BaseParticiple implements ParticipleInterface
 {
     /**
      * 分词方法

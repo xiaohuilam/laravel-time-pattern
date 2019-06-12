@@ -6,7 +6,7 @@ use Xiaohuilam\LaravelTimePattern\Participle\Interfaces\ParticipleInterface;
 /**
  * 自定义分词 本地
  */
-class CustomizeParticiple implements ParticipleInterface
+class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
 {
     protected static $rules = [
         '/[\d]{1,2}[\W^\:^\ ]{1,4}[\d]{1,2}[\W^\:^\ ]{1,4}20[\d]{2}/',
@@ -33,8 +33,8 @@ class CustomizeParticiple implements ParticipleInterface
             if (count($matches) > 0) {
                 foreach ($matches as $word) {
                     $results->push([
+                        'word' => $word,
                         'tag' => 't',
-                        'word' => $word
                     ]);
                 }
             }

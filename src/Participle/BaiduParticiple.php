@@ -6,7 +6,7 @@ use Xiaohuilam\LaravelTimePattern\Participle\Interfaces\ParticipleInterface;
 /**
  * 百度分词 网络
  */
-class BaiduParticiple implements ParticipleInterface
+class BaiduParticiple extends BaseParticiple implements ParticipleInterface
 {
     protected static function getConfig($name)
     {

@@ -1,6 +1,8 @@
 <?php
 namespace Xiaohuilam\LaravelTimePattern\Result;
 
+use Xiaohuilam\LaravelTimePattern\Date\Carbon;
+
 class ResultObject
 {
     /**
@@ -115,7 +117,7 @@ class ResultObject
 
     /**
      * 获取开始时间
-     * @param \Carbon\Carbon $carbon
+     * @param Carbon $carbon
      * @return string
      */
     public function setFromCarbon($carbon)
