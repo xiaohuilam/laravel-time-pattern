@@ -94,7 +94,7 @@ class ResultObject
      *
      * @return string
      */
-    public function getFromDatetime()
+    public function getFromDatetime)
     {
         return implode(' ', [
             implode('-', [$this->from_year, $this->from_month, $this->from_day,]),
@@ -107,7 +107,7 @@ class ResultObject
      *
      * @return string
      */
-    public function getToDatetime()
+    public function getToDatetime)
     {
         return implode(' ', [
             implode('-', [$this->to_year, $this->to_month, $this->to_day,]),
@@ -280,7 +280,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromYear($from_year)
+    public function getFromYear()
     {
         return $this->from_year;
     }
@@ -290,7 +290,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromMonth($from_month)
+    public function getFromMonth()
     {
         return $this->from_month;
     }
@@ -300,7 +300,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromDay($from_day)
+    public function getFromDay()
     {
         return $this->from_day;
     }
@@ -310,7 +310,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromHour($from_hour)
+    public function getFromHour()
     {
         return $this->from_hour;
     }
@@ -320,7 +320,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromMinute($from_minute)
+    public function getFromMinute()
     {
         return $this->from_minute;
     }
@@ -330,7 +330,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getFromSecond($from_second)
+    public function getFromSecond()
     {
         return $this->from_second;
     }
@@ -340,7 +340,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToYear($to_year)
+    public function getToYear()
     {
         return $this->to_year;
     }
@@ -350,7 +350,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToMonth($to_month)
+    public function getToMonth()
     {
         return $this->to_month;
     }
@@ -360,7 +360,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToDay($to_day)
+    public function getToDay()
     {
         return $this->to_day;
     }
@@ -370,7 +370,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToHour($to_hour)
+    public function getToHour()
     {
         return $this->to_hour;
     }
@@ -380,7 +380,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToMinute($to_minute)
+    public function getToMinute()
     {
         return $this->to_minute;
     }
@@ -390,7 +390,7 @@ class ResultObject
      *
      * @return int|null
      */
-    public function getToSecond($to_second)
+    public function getToSecond()
     {
         return $this->to_second;
     }
