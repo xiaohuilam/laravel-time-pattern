@@ -23,6 +23,8 @@ class StandardRule extends AbstractRule implements RuleInterface
         '/([\d]{4})[\W^\:^\ ]{1,4}([\d]{1,2})[\W^\:^\ ]{1,4}([\d]{1,2})/' => ['year', 'month', 'day',],
         // YYYY-mm
         '/([\d]{4})[\W^\:^\ ]{1,4}([\d]{1,2})/' => ['year', 'month',],
+        // YYYY年mm月
+        '/([\d]{4})年([\d]{1,2})月/' => ['year', 'month',],
         // mm-dd-YYYY
         '/([\d]{1,2})[\W^\:^\ ]{1,4}([\d]{1,2})[\W^\:^\ ]{1,4}([\d]{4})/' => ['month', 'day', 'year',],
         // mm-dd

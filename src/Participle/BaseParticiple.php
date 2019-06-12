@@ -32,7 +32,7 @@ abstract class BaseParticiple
         $words = collect($words)->toArray();
         foreach ($words as $key => &$word) {
             for ($i=1; $i < 6; $i++) {
-                if (!isset($words[$key + $i])) {
+                if ($word['tag'] != 't' || !isset($words[$key + $i])) {
                     break;
                 }
 
