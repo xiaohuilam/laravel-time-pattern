@@ -33,6 +33,7 @@ class DayRule extends AbstractRule implements RuleInterface
         '/明日/i' => ['create' => '+1 days', 'sets' => ['year', 'month', 'day',]],
         '/tomorrow/i' => ['create' => '+1 days', 'sets' => ['year', 'month', 'day',]],
         '/next day/i' => ['create' => '+1 days', 'sets' => ['year', 'month', 'day',]],
+        '/in (one|1) day/i' => ['create' => '+1 days', 'sets' => ['year', 'month', 'day',]],
         '/the day after tomorrow/i' => ['create' => '+2 days', 'sets' => ['year', 'month', 'day',]],
         '/the day after next day/i' => ['create' => '+2 days', 'sets' => ['year', 'month', 'day',]],
     ];
