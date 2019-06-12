@@ -31,7 +31,7 @@ abstract class BaseParticiple
     {
         $words = collect($words)->toArray();
         foreach ($words as $key => &$word) {
-            for ($i=1; $i < 6; $i++) {
+            for ($i = 1; $i < 10; $i++) {
                 if ($word['tag'] != 't' || !isset($words[$key + $i])) {
                     break;
                 }
@@ -43,6 +43,7 @@ abstract class BaseParticiple
 
                 $word['word'] .= $word_i['word'];
                 $word_i['word'] = '';
+                unset($words[$key + $i]);
             }
         }
 
