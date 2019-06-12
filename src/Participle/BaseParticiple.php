@@ -42,6 +42,7 @@ abstract class BaseParticiple
                 }
 
                 $word['word'] .= $word_i['word'];
+                $word_i['word'] = '';
             }
         }
 
