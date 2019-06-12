@@ -10,6 +10,8 @@ use Fukuball\Jieba\Posseg;
  */
 class JiebaParticiple extends BaseParticiple implements ParticipleInterface
 {
+    protected static $init = false;
+
     /**
      * 分词方法
      *
@@ -19,9 +21,12 @@ class JiebaParticiple extends BaseParticiple implements ParticipleInterface
     public static function parts($sentence)
     {
         ini_set('memory_limit', -1);
-        Jieba::init(array('dict' => 'small'));
-        //Finalseg::init();
-        Posseg::init();
+        if (!self::$init) {
+            Jieba::init(array('dict' => 'small'));
+            //Finalseg::init();
+            Posseg::init();
+            self::$init = true;
+        }
         return Posseg::cut($sentence);
     }
 }
