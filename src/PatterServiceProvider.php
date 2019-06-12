@@ -5,13 +5,23 @@ use Illuminate\Support\ServiceProvider;
 
 class PatterServiceProvider extends ServiceProvider
 {
+    const CONFIG = __DIR__ . '/config/nlp_time_pattern.php';
+
     public function register()
     {
         $this->mergeConfig();
+        $this->publishConfig();
     }
 
     protected function mergeConfig()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/nlp_time_pattern.php', 'nlp_time_pattern');
+        $this->mergeConfigFrom(self::CONFIG, 'nlp_time_pattern');
+    }
+
+    protected function publishConfig()
+    {
+        $this->publishableGroups([
+            self::CONFIG => config_path('nlp_time_pattern.php'),
+        ], 'time-pattern');
     }
 }
