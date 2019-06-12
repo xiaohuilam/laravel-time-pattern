@@ -146,7 +146,7 @@ class ResultObject
     /**
      * 开始年份
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromYear($from_year)
     {
@@ -157,7 +157,7 @@ class ResultObject
     /**
      * 开始月份
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromMonth($from_month)
     {
@@ -168,7 +168,7 @@ class ResultObject
     /**
      * 开始日
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromDay($from_day)
     {
@@ -179,7 +179,7 @@ class ResultObject
     /**
      * 开始时
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromHour($from_hour)
     {
@@ -190,7 +190,7 @@ class ResultObject
     /**
      * 开始分
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromMinute($from_minute)
     {
@@ -201,7 +201,7 @@ class ResultObject
     /**
      * 开始秒
      *
-     * @var int|null
+     * @param int|null
      */
     public function setFromSecond($from_second)
     {
@@ -212,7 +212,7 @@ class ResultObject
     /**
      * 结束年份
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToYear($to_year)
     {
@@ -223,7 +223,7 @@ class ResultObject
     /**
      * 结束月份
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToMonth($to_month)
     {
@@ -234,7 +234,7 @@ class ResultObject
     /**
      *结束始日
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToDay($to_day)
     {
@@ -245,7 +245,7 @@ class ResultObject
     /**
      *结束始时
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToHour($to_hour)
     {
@@ -256,7 +256,7 @@ class ResultObject
     /**
      *结束始分
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToMinute($to_minute)
     {
@@ -267,11 +267,131 @@ class ResultObject
     /**
      *结束始秒
      *
-     * @var int|null
+     * @param int|null
      */
     public function setToSecond($to_second)
     {
         $this->to_second = (int) $to_second;
         return $this;
+    }
+
+    /**
+     * 获取开始年份
+     *
+     * @return int|null
+     */
+    public function getFromYear($from_year)
+    {
+        return $this->from_year;
+    }
+
+    /**
+     * 获取开始月份
+     *
+     * @return int|null
+     */
+    public function getFromMonth($from_month)
+    {
+        return $this->from_month;
+    }
+
+    /**
+     * 获取开始日
+     *
+     * @return int|null
+     */
+    public function getFromDay($from_day)
+    {
+        return $this->from_day;
+    }
+
+    /**
+     * 获取开始时
+     *
+     * @return int|null
+     */
+    public function getFromHour($from_hour)
+    {
+        return $this->from_hour;
+    }
+
+    /**
+     * 获取开始分
+     *
+     * @return int|null
+     */
+    public function getFromMinute($from_minute)
+    {
+        return $this->from_minute;
+    }
+
+    /**
+     * 获取开始秒
+     *
+     * @return int|null
+     */
+    public function getFromSecond($from_second)
+    {
+        return $this->from_second;
+    }
+
+    /**
+     * 获取结束年份
+     *
+     * @return int|null
+     */
+    public function getToYear($to_year)
+    {
+        return $this->to_year;
+    }
+
+    /**
+     * 获取结束月份
+     *
+     * @return int|null
+     */
+    public function getToMonth($to_month)
+    {
+        return $this->to_month;
+    }
+
+    /**
+     *获取结束始日
+     *
+     * @return int|null
+     */
+    public function getToDay($to_day)
+    {
+        return $this->to_day;
+    }
+
+    /**
+     *获取结束始时
+     *
+     * @return int|null
+     */
+    public function getToHour($to_hour)
+    {
+        return $this->to_hour;
+    }
+
+    /**
+     *获取结束始分
+     *
+     * @return int|null
+     */
+    public function getToMinute($to_minute)
+    {
+        return $this->to_minute;
+    }
+
+    /**
+     *获取结束始秒
+     *
+     * @return int|null
+     */
+    public function getToSecond($to_second)
+    {
+        return $this->to_second;
     }
 }
