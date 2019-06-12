@@ -2,9 +2,9 @@
 namespace Xiaohuilam\LaravelTimePattern\Rules;
 
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
-use Illuminate\Support\Carbon;
+use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 
-class SubMonthRule
+class SubMonthRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -179,9 +179,12 @@ class SubMonthRule
      * 分析
      *
      * @param string $sentense
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense)
+    public function try($sentense, $from, $to)
     {
         /**
          * @var $results \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
@@ -193,14 +196,15 @@ class SubMonthRule
                 continue;
             } else {
                 $mat = new ResultObject();
-                $carbon = Carbon::now();
-                list($from, $to) = explode('-', $matches_into[0]);
+                list($start, $end) = explode('-', $matches_into[0]);
                 if (isset($matches_into[1])) {
-                    $carbon->setfrom($matches_into[1]);
+                    $from->month = $to->month = $matches_into[1];
+                    $from->day = $start;
+                    $to->day = $end;
                 }
 
-                $mat->setFromCarbon($carbon->copy()->setDay($from));
-                $mat->setToCarbon($carbon->copy()->setDay($to));
+                $mat->setFromCarbon($from);
+                $mat->setToCarbon($to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

@@ -3,9 +3,12 @@ namespace Xiaohuilam\LaravelTimePattern;
 
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
+use Xiaohuilam\LaravelTimePattern\Traits\HasCarbon;
 
 class Pattern
 {
+    use HasCarbon;
+
     /**
      * @var RuleInterface[]
      */
@@ -16,6 +19,7 @@ class Pattern
         Rules\DayRule::class,
         Rules\WeekRule::class,
         Rules\SubDayRule::class,
+        Rules\HourRule::class,
     ];
 
     /**
@@ -35,13 +39,16 @@ class Pattern
 
         $stacks = $words->pluck('word')->values();
         $result = [];
+        $from = self::carbon();
+        $to = self::carbon();
+
         foreach ($stacks as $stack) {
-            $result[$stack] = self::try($stack);
+            $result[$stack] = self::try($stack, $from, $to);
         }
         return $result;
     }
 
-    public static function try($sentence)
+    public static function try($sentence, $from, $to)
     {
         /**
          * @var ResultObject[]
@@ -52,7 +59,7 @@ class Pattern
              * @var RuleInterface $rule
              */
             $rule = new $rule_class;
-            $results = array_merge($results, $rule->try($sentence));
+            $results = array_merge($results, $rule->try($sentence, $from, $to));
         }
 
         return $results;

@@ -3,8 +3,9 @@ namespace Xiaohuilam\LaravelTimePattern\Rules;
 
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
 use Illuminate\Support\Str;
+use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 
-class StandardRule
+class StandardRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -32,9 +33,12 @@ class StandardRule
      * 分析
      *
      * @param string $sentense
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense)
+    public function try($sentense, $from, $to)
     {
         /**
          * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results

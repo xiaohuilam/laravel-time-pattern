@@ -2,9 +2,9 @@
 namespace Xiaohuilam\LaravelTimePattern\Rules;
 
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
-use Illuminate\Support\Carbon;
+use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 
-class MonthRule
+class MonthRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -12,90 +12,93 @@ class MonthRule
      * @var array
      */
     protected $parterns = [
-        '/本月今天/i' => ['+0month'],
-        '/本月今日/i' => ['+0month'],
-        '/上上月今天/i' => ['-2month'],
-        '/上上月今日/i' => ['-2month'],
-        '/上月今天/i' => ['-1month'],
-        '/上月今日/i' => ['-1month'],
-        '/下下月今天/i' => ['+2month'],
-        '/下下月今日/i' => ['+2month'],
-        '/下月今天/i' => ['+1month'],
-        '/下月今日/i' => ['+1month'],
-        '/month before last month/i' => ['-2month'],
-        '/two months ago/i' => ['-2month'],
-        '/2 months ago/i' => ['-2month'],
-        '/three months ago/i' => ['-3month'],
-        '/3 months ago/i' => ['-3month'],
-        '/four months ago/i' => ['-4month'],
-        '/4 months ago/i' => ['-4month'],
-        '/last mon[\t\W]{0,1}/i' => ['-1month'],
-        '/perv mon[\t\W]{0,1}/i' => ['-1month'],
-        '/previous mon[\t\W]{0,1}/i' => ['-1month'],
-        '/previously mon[\t\W]{0,1}/i' => ['-1month'],
-        '/next mon[\t\W]{0,1}/i' => ['+1month'],
-        '/month later/i' => ['+1month'],
-        '/following mon[\t\W]{0,1}/i' => ['+1month'],
-        '/this mon[\t\W]{0,1}/i' => ['month'],
-        '/in one mon[\t\W]{0,1}/i' => ['month'],
-        '/current mon[\t\W]{0,1}/i' => ['month'],
-        '/January/i' => ['January',],
-        '/1月/i' => ['January',],
-        '/一月/i' => ['January',],
-        '/jan/i' => ['January',],
-        '/february/i' => ['February',],
-        '/2月/i' => ['February',],
-        '/二月/i' => ['February',],
-        '/feb/i' => ['February',],
-        '/march/i' => ['March',],
-        '/3月/i' => ['March',],
-        '/三月/i' => ['March',],
-        '/mar/i' => ['March',],
-        '/april/i' => ['April',],
-        '/4月/i' => ['April',],
-        '/四月/i' => ['April',],
-        '/apr/i' => ['April',],
-        '/may/i' => ['May',],
-        '/5月/i' => ['May',],
-        '/五月/i' => ['May',],
-        '/ma/i' => ['May',],
-        '/june/i' => ['June',],
-        '/6月/i' => ['June',],
-        '/六月/i' => ['June',],
-        '/jun/i' => ['June',],
-        '/july/i' => ['July',],
-        '/7月/i' => ['July',],
-        '/七月/i' => ['July',],
-        '/jul/i' => ['July',],
-        '/august/i' => ['August',],
-        '/8月/i' => ['August',],
-        '/八月/i' => ['August',],
-        '/aug/i' => ['August',],
-        '/september/i' => ['September',],
-        '/9月/i' => ['September',],
-        '/九月/i' => ['September',],
-        '/sep/i' => ['September',],
-        '/october/i' => ['October',],
-        '/10月/i' => ['October',],
-        '/十月/i' => ['October',],
-        '/oct/i' => ['October',],
-        '/november/i' => ['November',],
-        '/11月/i' => ['November',],
-        '/十一月/i' => ['November',],
-        '/nov/i' => ['November',],
-        '/december/i' => ['December',],
-        '/12月/i' => ['December',],
-        '/十二月/i' => ['December',],
-        '/dec/i' => ['December',],
+        '/本月今天/i' => ['create' => '+0month', 'sets' => ['month',],],
+        '/本月今日/i' => ['create' => '+0month', 'sets' => ['month',],],
+        '/上上月今天/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/上上月今日/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/上月今天/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/上月今日/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/下下月今天/i' => ['create' => '+2month', 'sets' => ['month',],],
+        '/下下月今日/i' => ['create' => '+2month', 'sets' => ['month',],],
+        '/下月今天/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/下月今日/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/month before last month/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/two months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/2 months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/three months ago/i' => ['create' => '-3month', 'sets' => ['month',],],
+        '/3 months ago/i' => ['create' => '-3month', 'sets' => ['month',],],
+        '/four months ago/i' => ['create' => '-4month', 'sets' => ['month',],],
+        '/4 months ago/i' => ['create' => '-4month', 'sets' => ['month',],],
+        '/last mon[\t\W]{0,1}/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/perv mon[\t\W]{0,1}/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/previous mon[\t\W]{0,1}/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/previously mon[\t\W]{0,1}/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/next mon[\t\W]{0,1}/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/month later/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/following mon[\t\W]{0,1}/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/this mon[\t\W]{0,1}/i' => ['create' => 'month', 'sets' => ['month',],],
+        '/in one mon[\t\W]{0,1}/i' => ['create' => 'month', 'sets' => ['month',],],
+        '/current mon[\t\W]{0,1}/i' => ['create' => 'month', 'sets' => ['month',],],
+        '/January/i' => ['create' => 'January', 'sets' => ['month',],],
+        '/1月/i' => ['create' => 'January', 'sets' => ['month',],],
+        '/一月/i' => ['create' => 'January', 'sets' => ['month',],],
+        '/jan/i' => ['create' => 'January', 'sets' => ['month',],],
+        '/february/i' => ['create' => 'February', 'sets' => ['month',],],
+        '/2月/i' => ['create' => 'February', 'sets' => ['month',],],
+        '/二月/i' => ['create' => 'February', 'sets' => ['month',],],
+        '/feb/i' => ['create' => 'February', 'sets' => ['month',],],
+        '/march/i' => ['create' => 'March', 'sets' => ['month',],],
+        '/3月/i' => ['create' => 'March', 'sets' => ['month',],],
+        '/三月/i' => ['create' => 'March', 'sets' => ['month',],],
+        '/mar/i' => ['create' => 'March', 'sets' => ['month',],],
+        '/april/i' => ['create' => 'April', 'sets' => ['month',],],
+        '/4月/i' => ['create' => 'April', 'sets' => ['month',],],
+        '/四月/i' => ['create' => 'April', 'sets' => ['month',],],
+        '/apr/i' => ['create' => 'April', 'sets' => ['month',],],
+        '/may/i' => ['create' => 'May', 'sets' => ['month',],],
+        '/5月/i' => ['create' => 'May', 'sets' => ['month',],],
+        '/五月/i' => ['create' => 'May', 'sets' => ['month',],],
+        '/ma/i' => ['create' => 'May', 'sets' => ['month',],],
+        '/june/i' => ['create' => 'June', 'sets' => ['month',],],
+        '/6月/i' => ['create' => 'June', 'sets' => ['month',],],
+        '/六月/i' => ['create' => 'June', 'sets' => ['month',],],
+        '/jun/i' => ['create' => 'June', 'sets' => ['month',],],
+        '/july/i' => ['create' => 'July', 'sets' => ['month',],],
+        '/7月/i' => ['create' => 'July', 'sets' => ['month',],],
+        '/七月/i' => ['create' => 'July', 'sets' => ['month',],],
+        '/jul/i' => ['create' => 'July', 'sets' => ['month',],],
+        '/august/i' => ['create' => 'August', 'sets' => ['month',],],
+        '/8月/i' => ['create' => 'August', 'sets' => ['month',],],
+        '/八月/i' => ['create' => 'August', 'sets' => ['month',],],
+        '/aug/i' => ['create' => 'August', 'sets' => ['month',],],
+        '/september/i' => ['create' => 'September', 'sets' => ['month',],],
+        '/9月/i' => ['create' => 'September', 'sets' => ['month',],],
+        '/九月/i' => ['create' => 'September', 'sets' => ['month',],],
+        '/sep/i' => ['create' => 'September', 'sets' => ['month',],],
+        '/october/i' => ['create' => 'October', 'sets' => ['month',],],
+        '/10月/i' => ['create' => 'October', 'sets' => ['month',],],
+        '/十月/i' => ['create' => 'October', 'sets' => ['month',],],
+        '/oct/i' => ['create' => 'October', 'sets' => ['month',],],
+        '/november/i' => ['create' => 'November', 'sets' => ['month',],],
+        '/11月/i' => ['create' => 'November', 'sets' => ['month',],],
+        '/十一月/i' => ['create' => 'November', 'sets' => ['month',],],
+        '/nov/i' => ['create' => 'November', 'sets' => ['month',],],
+        '/december/i' => ['create' => 'December', 'sets' => ['month',],],
+        '/12月/i' => ['create' => 'December', 'sets' => ['month',],],
+        '/十二月/i' => ['create' => 'December', 'sets' => ['month',],],
+        '/dec/i' => ['create' => 'December', 'sets' => ['month',],],
     ];
 
     /**
      * 分析
      *
      * @param string $sentense
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense)
+    public function try($sentense, $from, $to)
     {
         /**
          * @var $results \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
@@ -107,11 +110,17 @@ class MonthRule
                 continue;
             } else {
                 $mat = new ResultObject();
-                $carbon = Carbon::parse($matches_into[0]);
-                $mat->setFromMonth($carbon->copy()->firstOfMonth()->month);
-                $mat->setToMonth($carbon->copy()->endOfMonth()->month);
-                $mat->setFromDay($carbon->copy()->firstOfMonth()->day);
-                $mat->setToDay( $carbon->copy()->endOfMonth()->day);
+                $from = $from->parse($matches_into['create']);
+                foreach ($matches_into['sets'] as $set) {
+                    $from = $from->set($set, $from->{$set});
+
+                }
+                $to = $to->parse($matches_into['create']);
+                foreach ($matches_into['sets'] as $set) {
+                    $to = $to->set($set, $to->{$set});
+                }
+                $mat->setFromCarbon($from);
+                $mat->setToCarbon($to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

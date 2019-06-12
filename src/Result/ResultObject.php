@@ -120,14 +120,13 @@ class ResultObject
      * @param Carbon $carbon
      * @return string
      */
-    public function setFromCarbon($carbon)
+    public function setFromCarbon($carbon, $action = 'From')
     {
-        $this->setFromYear($carbon->year);
-        $this->setFromMonth($carbon->month);
-        $this->setFromDay($carbon->day);
-        $this->setFromHour($carbon->hour);
-        $this->setFromMinute($carbon->minute);
-        $this->setFromSecond($carbon->second);
+        foreach ($carbon->getSets() as $set) {
+            $method = 'set' . $action . ucfirst($set);
+            $this->{$method}($carbon->{$set});
+        }
+        return $this;
     }
 
     /**
@@ -135,14 +134,13 @@ class ResultObject
      * @param \Carbon\Carbon $carbon
      * @return string
      */
-    public function setToCarbon($carbon)
+    public function setToCarbon($carbon, $action = 'To')
     {
-        $this->setToYear($carbon->year);
-        $this->setToMonth($carbon->month);
-        $this->setToDay($carbon->day);
-        $this->setToHour($carbon->hour);
-        $this->setToMinute($carbon->minute);
-        $this->setToSecond($carbon->second);
+        foreach ($carbon->getSets() as $set) {
+            $method = 'set' . $action . ucfirst($set);
+            $this->{$method}($carbon->{$set});
+        }
+        return $this;
     }
 
     /**
@@ -153,6 +151,7 @@ class ResultObject
     public function setFromYear($from_year)
     {
         $this->from_year = (int) $from_year;
+        return $this;
     }
 
     /**
@@ -163,6 +162,7 @@ class ResultObject
     public function setFromMonth($from_month)
     {
         $this->from_month = (int) $from_month;
+        return $this;
     }
 
     /**
@@ -173,6 +173,7 @@ class ResultObject
     public function setFromDay($from_day)
     {
         $this->from_day = (int) $from_day;
+        return $this;
     }
 
     /**
@@ -183,6 +184,7 @@ class ResultObject
     public function setFromHour($from_hour)
     {
         $this->from_hour = (int) $from_hour;
+        return $this;
     }
 
     /**
@@ -193,6 +195,7 @@ class ResultObject
     public function setFromMinute($from_minute)
     {
         $this->from_minute = (int) $from_minute;
+        return $this;
     }
 
     /**
@@ -203,6 +206,7 @@ class ResultObject
     public function setFromSecond($from_second)
     {
         $this->from_second = (int) $from_second;
+        return $this;
     }
 
     /**
@@ -213,6 +217,7 @@ class ResultObject
     public function setToYear($to_year)
     {
         $this->to_year = (int) $to_year;
+        return $this;
     }
 
     /**
@@ -223,6 +228,7 @@ class ResultObject
     public function setToMonth($to_month)
     {
         $this->to_month = (int) $to_month;
+        return $this;
     }
 
     /**
@@ -233,6 +239,7 @@ class ResultObject
     public function setToDay($to_day)
     {
         $this->to_day = (int) $to_day;
+        return $this;
     }
 
     /**
@@ -243,6 +250,7 @@ class ResultObject
     public function setToHour($to_hour)
     {
         $this->to_hour = (int) $to_hour;
+        return $this;
     }
 
     /**
@@ -253,6 +261,7 @@ class ResultObject
     public function setToMinute($to_minute)
     {
         $this->to_minute = (int) $to_minute;
+        return $this;
     }
 
     /**
@@ -263,5 +272,6 @@ class ResultObject
     public function setToSecond($to_second)
     {
         $this->to_second = (int) $to_second;
+        return $this;
     }
 }

@@ -2,9 +2,9 @@
 namespace Xiaohuilam\LaravelTimePattern\Rules;
 
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
-use Illuminate\Support\Carbon;
+use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 
-class SubDayRule
+class SubDayRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -51,9 +51,12 @@ class SubDayRule
      * 分析
      *
      * @param string $sentense
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
+     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense)
+    public function try($sentense, $from, $to)
     {
         /**
          * @var $results \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
@@ -64,15 +67,25 @@ class SubDayRule
             if (!count($ret)) {
                 continue;
             } else {
-                $mat = new ResultObject();
-                $carbon = Carbon::now();
-                list($from, $to) = explode('-', $matches_into[0]);
-                if (isset($matches_into[1])) {
-                    $carbon->setfrom($matches_into[1]);
-                }
+                $carbon = self::carbon();
 
-                $mat->setFromCarbon($carbon->copy()->setDay($from));
-                $mat->setToCarbon($carbon->copy()->setDay($to));
+                $mat = new ResultObject();
+                list($start, $end) = explode('-', $matches_into[0]);
+                if (isset($matches_into[1])) {
+                    $carbon = $carbon->parse($matches_into[1]);
+
+                    $from = $from->set('year', $carbon->year);
+                    $from = $from->set('month', $carbon->month);
+                    $from = $from->set('day', $carbon->day);
+                    $to = $to->set('year', $carbon->year);
+                    $to = $to->set('month', $carbon->month);
+                    $to = $to->set('day', $carbon->day);
+                }
+                $from = $from->set('hour', $carbon->hour);
+                $to = $to->set('hour', $carbon->hour);
+
+                $mat->setFromCarbon($from)
+                    ->setToCarbon($to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

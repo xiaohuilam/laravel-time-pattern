@@ -4,7 +4,7 @@ namespace Xiaohuilam\LaravelTimePattern\Rules;
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 
-class WeekRule extends AbstractRule implements RuleInterface
+class HourRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -12,13 +12,8 @@ class WeekRule extends AbstractRule implements RuleInterface
      * @var array
      */
     protected $parterns = [
-        '/本周/i' => ['create' => 'this week', 'sets' => ['year', 'month', 'day',]],
-        '/上周/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],
-        '/下周/i' => ['create' => '+1 week', 'sets' => ['year', 'month', 'day',]],
-        '/this week/i' => ['create' => 'this week', 'sets' => ['year', 'month', 'day',]],
-        '/last week/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],
-        '/previous week/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],
-        '/next week/i' => ['create' => '+1 week', 'sets' => ['year', 'month', 'day',]],
+        '/([十一二三四五六七八九\d]{1,2})点整/i' => ['create' => '2019-01-01 00:00:00', 'sets' => ['minute',]],
+        '/([十一二三四五六七八九\d]{1,2})点半/i' => ['create' => '2019-01-01 00:30:00', 'sets' => ['minute',]],
     ];
 
     /**
@@ -43,10 +38,10 @@ class WeekRule extends AbstractRule implements RuleInterface
             } else {
                 $mat = new ResultObject();
                 $carbon = self::carbon()->parse($matches_into['create']);
-                $from = $from->set('month', $carbon->copy()->firstOfMonth()->month);
-                $from = $from->set('day', $carbon->copy()->firstOfMonth()->day);
-                $to = $to->set('month', $carbon->copy()->endOfMonth()->month);
-                $to = $to->set('day', $carbon->copy()->endOfMonth()->day);
+                foreach ($matches_into['sets'] as $set) {
+                    $from = $from->set($set, $carbon->{$set});
+                    $to = $to->set($set, $carbon->{$set});
+                }
 
                 $mat->setFromCarbon($from);
                 $mat->setToCarbon($to);
