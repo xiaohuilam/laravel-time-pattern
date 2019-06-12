@@ -12,9 +12,13 @@ class Carbon extends \Carbon\Carbon
     public function set($name, $value = NULL)
     {
         $this->sets[] = $name;
+        $method = '';
         if (method_exists(parent::class, 'set')) {
-            parent::set($name, $value);
+            $method = 'set';
+        } else {
+            $method = '__set';
         }
+        parent::{$method}($name, $value);
         return $this;
     }
 
