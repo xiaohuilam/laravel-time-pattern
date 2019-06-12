@@ -3,6 +3,8 @@ use Xiaohuilam\LaravelTimePattern\Pattern;
 
 require __DIR__ . '/boot.php';
 
+dump(Pattern::parse('在2020.1前，上海要率先实现垃圾分类')); // x
+dump(Pattern::parse('在2020.1前，上海要率先实现垃圾分类。并的2021年12月前向全国推广成功经验。')); // x
 dump(Pattern::parse('我一月吃了一月饼')); // √
 dump(Pattern::parse('我一月份吃了一月饼')); // √
 dump(Pattern::parse('客户今天来了，明天应该可以签合同')); // √

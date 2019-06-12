@@ -2,6 +2,7 @@
 
 return [
     'participles' => [
+        \Xiaohuilam\LaravelTimePattern\Participle\CustomizeParticiple::class,
         \Xiaohuilam\LaravelTimePattern\Participle\JiebaParticiple::class,
         \Xiaohuilam\LaravelTimePattern\Participle\BaiduParticiple::class,
     ],
