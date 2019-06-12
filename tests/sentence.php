@@ -9,3 +9,5 @@ dump(Pattern::parse('客户今天来了, 明天应该可以签合同'));
 dump(Pattern::parse('我下周结婚了'));
 dump(Pattern::parse('明年我还能遇见你么?'));
 dump(Pattern::parse('二月春风似剪刀'));
+dump(Pattern::parse('今年下半年吧'));
+dump(Pattern::parse('今年下半年吧'));

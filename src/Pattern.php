@@ -23,11 +23,13 @@ class Pattern
      */
     public static function parse($sentence)
     {
-        $words = [];
+        $words = collect([]);
         foreach (config('nlp_time_pattern.participles') as $participle) {
             $results = call_user_func([$participle, 'parts'], $sentence);
-            $words = array_merge($words, $results);
+            $words = $words->merge($results);
         }
+        $words = $words->unique();
+
         $stacks = [];
 
         foreach($words as $word) {
