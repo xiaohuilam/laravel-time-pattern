@@ -96,10 +96,37 @@ class ResultObject
      */
     public function getFromDatetime()
     {
-        return implode(' ', [
-            implode('-', [$this->from_year, $this->from_month, $this->from_day,]),
-            implode(':', [$this->from_hour, $this->from_minute, $this->from_second,]),
-        ]);
+        $result = [];
+        $date = [];
+        $time = [];
+        if ($this->getFromYear()) {
+            $date[] = $this->getFromYear();
+        }
+        if ($this->getFromMonth()) {
+            $date[] = $this->getFromMonth();
+        }
+        if ($this->getFromDay()) {
+            $date[] = $this->getFromDay();
+        }
+
+        if ($this->getFromHour()) {
+            $time[] = $this->getFromHour();
+        }
+        if ($this->getFromMinute()) {
+            $time[] = $this->getFromMinute();
+        }
+        if ($this->getFromSecond()) {
+            $time[] = $this->getFromSecond();
+        }
+
+        if (count($date)) {
+            $result[] = implode('-', $date);
+        }
+        if (count($time)) {
+            $result[] = implode(':', $time);
+        }
+
+        return implode(' ', $result);
     }
 
     /**
@@ -109,10 +136,37 @@ class ResultObject
      */
     public function getToDatetime()
     {
-        return implode(' ', [
-            implode('-', [$this->to_year, $this->to_month, $this->to_day,]),
-            implode(':', [$this->to_hour, $this->to_minute, $this->to_second,]),
-        ]);
+        $result = [];
+        $date = [];
+        $time = [];
+        if ($this->getToYear()) {
+            $date[] = $this->getToYear();
+        }
+        if ($this->getToMonth()) {
+            $date[] = $this->getToMonth();
+        }
+        if ($this->getToDay()) {
+            $date[] = $this->getToDay();
+        }
+
+        if ($this->getToHour()) {
+            $time[] = $this->getToHour();
+        }
+        if ($this->getToMinute()) {
+            $time[] = $this->getToMinute();
+        }
+        if ($this->getToSecond()) {
+            $time[] = $this->getToSecond();
+        }
+
+        if (count($date)) {
+            $result[] = implode('-', $date);
+        }
+        if (count($time)) {
+            $result[] = implode(':', $time);
+        }
+
+        return implode(' ', $result);
     }
 
     /**
@@ -150,7 +204,7 @@ class ResultObject
      */
     public function setFromYear($from_year)
     {
-        $this->from_year = (int) $from_year;
+        $this->from_year = (int)$from_year;
         return $this;
     }
 
@@ -161,7 +215,7 @@ class ResultObject
      */
     public function setFromMonth($from_month)
     {
-        $this->from_month = (int) $from_month;
+        $this->from_month = (int)$from_month;
         return $this;
     }
 
@@ -172,7 +226,7 @@ class ResultObject
      */
     public function setFromDay($from_day)
     {
-        $this->from_day = (int) $from_day;
+        $this->from_day = (int)$from_day;
         return $this;
     }
 
@@ -183,7 +237,7 @@ class ResultObject
      */
     public function setFromHour($from_hour)
     {
-        $this->from_hour = (int) $from_hour;
+        $this->from_hour = (int)$from_hour;
         return $this;
     }
 
@@ -194,7 +248,7 @@ class ResultObject
      */
     public function setFromMinute($from_minute)
     {
-        $this->from_minute = (int) $from_minute;
+        $this->from_minute = (int)$from_minute;
         return $this;
     }
 
@@ -205,7 +259,7 @@ class ResultObject
      */
     public function setFromSecond($from_second)
     {
-        $this->from_second = (int) $from_second;
+        $this->from_second = (int)$from_second;
         return $this;
     }
 
@@ -216,7 +270,7 @@ class ResultObject
      */
     public function setToYear($to_year)
     {
-        $this->to_year = (int) $to_year;
+        $this->to_year = (int)$to_year;
         return $this;
     }
 
@@ -227,7 +281,7 @@ class ResultObject
      */
     public function setToMonth($to_month)
     {
-        $this->to_month = (int) $to_month;
+        $this->to_month = (int)$to_month;
         return $this;
     }
 
@@ -238,7 +292,7 @@ class ResultObject
      */
     public function setToDay($to_day)
     {
-        $this->to_day = (int) $to_day;
+        $this->to_day = (int)$to_day;
         return $this;
     }
 
@@ -249,7 +303,7 @@ class ResultObject
      */
     public function setToHour($to_hour)
     {
-        $this->to_hour = (int) $to_hour;
+        $this->to_hour = (int)$to_hour;
         return $this;
     }
 
@@ -260,7 +314,7 @@ class ResultObject
      */
     public function setToMinute($to_minute)
     {
-        $this->to_minute = (int) $to_minute;
+        $this->to_minute = (int)$to_minute;
         return $this;
     }
 
@@ -271,7 +325,7 @@ class ResultObject
      */
     public function setToSecond($to_second)
     {
-        $this->to_second = (int) $to_second;
+        $this->to_second = (int)$to_second;
         return $this;
     }
 
