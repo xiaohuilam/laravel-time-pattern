@@ -36,15 +36,13 @@ class HourRule extends AbstractRule implements RuleInterface
             if (!count($ret)) {
                 continue;
             } else {
-                $mat = new ResultObject();
                 $carbon = self::carbon()->parse($matches_into['create']);
                 foreach ($matches_into['sets'] as $set) {
                     $from = $from->set($set, $carbon->{$set});
                     $to = $to->set($set, $carbon->{$set});
                 }
 
-                $mat->setFromCarbon($from);
-                $mat->setToCarbon($to);
+                $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

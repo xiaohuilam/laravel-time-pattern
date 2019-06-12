@@ -109,7 +109,6 @@ class MonthRule extends AbstractRule implements RuleInterface
             if (!count($ret)) {
                 continue;
             } else {
-                $mat = new ResultObject();
                 $from = $from->parse($matches_into['create']);
                 foreach ($matches_into['sets'] as $set) {
                     $from = $from->set($set, $from->{$set});
@@ -119,8 +118,8 @@ class MonthRule extends AbstractRule implements RuleInterface
                 foreach ($matches_into['sets'] as $set) {
                     $to = $to->set($set, $to->{$set});
                 }
-                $mat->setFromCarbon($from);
-                $mat->setToCarbon($to);
+
+                $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

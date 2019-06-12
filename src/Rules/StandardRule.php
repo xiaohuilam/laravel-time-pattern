@@ -49,13 +49,13 @@ class StandardRule extends AbstractRule implements RuleInterface
             if (!count($ret)) {
                 continue;
             } else {
-                $mat = new ResultObject();
+                $from = self::carbon();
+                $to = self::carbon();
                 foreach ($matches_into as $index => $attribute) {
-                    foreach (['from', 'to'] as $fromTo) {
-                        $method = Str::camel('set_' . $fromTo . '_' . $attribute);
-                        $mat->{$method}($ret[$index + 1]);
-                    }
+                    $from->set($attribute, $ret[$index + 1]);
+                    $to->set($attribute, $ret[$index + 1]);
                 }
+                $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

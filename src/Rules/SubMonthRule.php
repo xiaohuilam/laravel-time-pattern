@@ -195,7 +195,6 @@ class SubMonthRule extends AbstractRule implements RuleInterface
             if (!count($ret)) {
                 continue;
             } else {
-                $mat = new ResultObject();
                 list($start, $end) = explode('-', $matches_into[0]);
                 if (isset($matches_into[1])) {
                     $from->month = $to->month = $matches_into[1];
@@ -203,8 +202,7 @@ class SubMonthRule extends AbstractRule implements RuleInterface
                     $to->day = $end;
                 }
 
-                $mat->setFromCarbon($from);
-                $mat->setToCarbon($to);
+                $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }

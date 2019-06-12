@@ -69,7 +69,6 @@ class SubDayRule extends AbstractRule implements RuleInterface
             } else {
                 $carbon = self::carbon();
 
-                $mat = new ResultObject();
                 list($start, $end) = explode('-', $matches_into[0]);
                 if (isset($matches_into[1])) {
                     $carbon = $carbon->parse($matches_into[1]);
@@ -84,8 +83,7 @@ class SubDayRule extends AbstractRule implements RuleInterface
                 $from = $from->set('hour', $carbon->hour);
                 $to = $to->set('hour', $carbon->hour);
 
-                $mat->setFromCarbon($from)
-                    ->setToCarbon($to);
+                $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
                 return $results;
             }
