@@ -1,7 +1,7 @@
 <?php
 use Xiaohuilam\LaravelTimePattern\Pattern;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/boot.php';
 
 dump(Pattern::try('今天'));
 dump(Pattern::try('今天下午'));

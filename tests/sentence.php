@@ -1,7 +1,7 @@
 <?php
 use Xiaohuilam\LaravelTimePattern\Pattern;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/boot.php';
 
 dump(Pattern::parse('我一月吃了一月饼'));
 dump(Pattern::parse('我一月份吃了一月饼'));
