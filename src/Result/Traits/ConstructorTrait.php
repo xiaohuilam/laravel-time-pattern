@@ -6,6 +6,16 @@ use Xiaohuilam\LaravelTimePattern\Date\Carbon;
 trait ConstructorTrait
 {
     /**
+     * @var Carbon
+     */
+    public $from;
+
+    /**
+     * @var Carbon
+     */
+    public $to;
+
+    /**
      * 构造
      *
      * @param Carbon $from
@@ -26,6 +36,7 @@ trait ConstructorTrait
      */
     protected function setFromCarbon($carbon, $action = 'From')
     {
+        $this->{strtolower($action)} = $carbon;
         foreach ($carbon->getSets() as $set) {
             $method = 'set' . $action . ucfirst($set);
             $this->{$method}($carbon->{$set});
@@ -41,6 +52,7 @@ trait ConstructorTrait
      */
     protected function setToCarbon($carbon, $action = 'To')
     {
+        $this->{strtolower($action)} = $carbon;
         foreach ($carbon->getSets() as $set) {
             $method = 'set' . $action . ucfirst($set);
             $this->{$method}($carbon->{$set});

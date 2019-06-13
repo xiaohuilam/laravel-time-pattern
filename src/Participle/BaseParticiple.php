@@ -1,6 +1,8 @@
 <?php
 namespace Xiaohuilam\LaravelTimePattern\Participle;
 
+use Xiaohuilam\LaravelTimePattern\Statement\Statement;
+
 /**
  * 分词
  *
@@ -47,6 +49,8 @@ abstract class BaseParticiple
             }
         }
 
-        return $words;
+        return collect($words)->map(function ($item) {
+            return new Statement($item);
+        });
     }
 }

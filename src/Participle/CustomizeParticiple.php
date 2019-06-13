@@ -2,6 +2,7 @@
 namespace Xiaohuilam\LaravelTimePattern\Participle;
 
 use Xiaohuilam\LaravelTimePattern\Participle\Interfaces\ParticipleInterface;
+use Xiaohuilam\LaravelTimePattern\Statement\Statement;
 
 /**
  * 自定义分词 本地
@@ -66,6 +67,6 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
             ];
         });
 
-        return $results->toArray();
+        return $results;
     }
 }

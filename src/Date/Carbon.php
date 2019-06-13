@@ -26,4 +26,21 @@ class Carbon extends \Carbon\Carbon
     {
         return collect($this->sets)->unique()->toArray();
     }
+
+    public function clearSets()
+    {
+        return $this->sets = [];
+    }
+
+    /**
+     * Get a copy of the instance.
+     *
+     * @return static|CarbonInterface
+     */
+    public function copy()
+    {
+        $new = clone $this;
+        $new->clearSets();
+        return $new;
+    }
 }

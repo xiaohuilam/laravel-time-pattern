@@ -4,10 +4,11 @@ namespace Xiaohuilam\LaravelTimePattern\Result;
 use Xiaohuilam\LaravelTimePattern\Result\Traits\GetterTrait;
 use Xiaohuilam\LaravelTimePattern\Result\Traits\SetterTrait;
 use Xiaohuilam\LaravelTimePattern\Result\Traits\ConstructorTrait;
+use Xiaohuilam\LaravelTimePattern\Result\Traits\FeatureTrait;
 
 class ResultObject
 {
-    use GetterTrait, SetterTrait, ConstructorTrait;
+    use GetterTrait, SetterTrait, ConstructorTrait, FeatureTrait;
 
     /**
      * 开始年份

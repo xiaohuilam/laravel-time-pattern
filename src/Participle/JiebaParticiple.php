@@ -4,6 +4,7 @@ namespace Xiaohuilam\LaravelTimePattern\Participle;
 use Xiaohuilam\LaravelTimePattern\Participle\Interfaces\ParticipleInterface;
 use Fukuball\Jieba\Jieba;
 use Fukuball\Jieba\Posseg;
+use Xiaohuilam\LaravelTimePattern\Statement\Statement;
 
 /**
  * 结巴分词 本地
@@ -27,6 +28,8 @@ class JiebaParticiple extends BaseParticiple implements ParticipleInterface
             Posseg::init();
             self::$init = true;
         }
-        return Posseg::cut($sentence);
+        $result = Posseg::cut($sentence);
+
+        return $result;
     }
 }

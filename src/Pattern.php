@@ -2,7 +2,6 @@
 namespace Xiaohuilam\LaravelTimePattern;
 
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
-use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
 use Xiaohuilam\LaravelTimePattern\Traits\HasCarbon;
 use Illuminate\Pipeline\Pipeline;
 
@@ -39,38 +38,29 @@ class Pattern
         }
         $words = collect($words)->values();
 
-        $result = [];
         $from = self::carbon();
         $to = self::carbon();
 
-        foreach ($words as $item) {
-            $stack = $item['word'];
-            if ($item['tag'] != 't') {
-                $result[] = [
-                    'statement' => $stack,
-                    'results' => [],
-                ];
-            }
-            /**
-             * @var ResultObject[]
-             */
-            $results = [];
-            self::try($stack, $from, $to, $results);
+        $ret = [];
 
-            $result[] = [
-                'statement' => $stack,
-                'results' => $results,
-            ];
-        }
-        return $result;
+        $stack = [];
+
+        //dd($words->take(3), $words);
+        $words = $words->toArray();
+
+        return (new Pipeline(app()))
+            ->send([&$from, &$to, &$ret, &$stack])
+            ->through($words)
+            ->via('parse')
+            ->thenReturn();
     }
 
-    public static function try($sentence, &$from, &$to, &$results)
+    public static function try($sentence, &$from, &$to, &$results, &$stack)
     {
         return (new Pipeline(app()))
-            ->send([$sentence, &$from, &$to, &$results])
+            ->send([$sentence, &$from, &$to, &$results, &$stack])
             ->through(self::$rules)
-            ->via('try')
+            ->via('parse')
             ->thenReturn();
     }
 }

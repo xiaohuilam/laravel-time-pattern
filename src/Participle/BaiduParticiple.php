@@ -2,6 +2,7 @@
 namespace Xiaohuilam\LaravelTimePattern\Participle;
 
 use Xiaohuilam\LaravelTimePattern\Participle\Interfaces\ParticipleInterface;
+use Xiaohuilam\LaravelTimePattern\Statement\Statement;
 
 /**
  * 百度分词 网络
@@ -32,7 +33,7 @@ class BaiduParticiple extends BaseParticiple implements ParticipleInterface
      */
     public static function parts($sentence)
     {
-        $depParser = self::getClient()->depParser($sentence, ['mode' => 1]);
+        $depParser = self::getClient()->depParser($sentence);
         $lexer = self::getClient()->lexer($sentence);
         $result = collect([]);
 

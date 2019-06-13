@@ -44,13 +44,14 @@ class StandardRule extends AbstractRule implements RuleInterface
         /**
          * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results
          */
-        list($sentense, &$from, &$to, &$results) = $parameters;
+        list($sentense, &$from, &$to, &$results, &$stack) = $parameters;
 
         foreach ($this->parterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;
             } else {
+                redo:
                 $from = self::carbon();
                 $to = self::carbon();
                 foreach ($matches_into as $index => $attribute) {
@@ -58,6 +59,21 @@ class StandardRule extends AbstractRule implements RuleInterface
                     $to->set($attribute, $ret[$index + 1]);
                 }
                 $mat = new ResultObject($from, $to);
+
+                /**
+                 * @var ResultObject $last
+                 */
+                $last = last($stack);
+                if ($last && $mat->from === $from && $mat->to === $to && $last->isWideThan($mat)) {
+                    $from_new = $from->copy();
+                    $to_new = $to->copy();
+
+                    $from = &$from_new;
+                    $to = &$to_new;
+                    $mat = new ResultObject($from, $to);
+                    $stack[] = $mat;
+                    goto redo;
+                }
                 $results = array_merge($results, [$mat]);
                 return $next($parameters);
             }
