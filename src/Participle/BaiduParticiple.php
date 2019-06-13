@@ -32,7 +32,7 @@ class BaiduParticiple extends BaseParticiple implements ParticipleInterface
      */
     public static function parts($sentence)
     {
-        $depParser = self::getClient()->depParser($sentence);
+        $depParser = self::getClient()->depParser($sentence, ['mode' => 1]);
         $lexer = self::getClient()->lexer($sentence);
         $result = collect([]);
 
@@ -43,9 +43,9 @@ class BaiduParticiple extends BaseParticiple implements ParticipleInterface
             }, $depParser['items']));
         }
         if (isset($lexer['items'])) {
-            $result = $result->merge(collect($lexer['items'])->where('ne', 'TIME')->values()->map(function ($item) {
+            $result = $result->merge(collect($lexer['items'])->map(function ($item) {
                 $item['word'] = $item['item'];
-                $item['tag'] = 't';
+                $item['tag'] = $item['ne'] == 'TIME' ? 't' : 'u';
                 return $item;
             }));
         }

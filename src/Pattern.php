@@ -4,6 +4,7 @@ namespace Xiaohuilam\LaravelTimePattern;
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
 use Xiaohuilam\LaravelTimePattern\Traits\HasCarbon;
+use Illuminate\Pipeline\Pipeline;
 
 class Pattern
 {
@@ -12,7 +13,7 @@ class Pattern
     /**
      * @var RuleInterface[]
      */
-    protected static $rules = [
+    public static $rules = [
         Rules\StandardRule::class,
         Rules\SubMonthRule::class,
         Rules\MonthRule::class,
@@ -20,6 +21,7 @@ class Pattern
         Rules\WeekRule::class,
         Rules\SubDayRule::class,
         Rules\HourRule::class,
+        Rules\YearRule::class,
     ];
 
     /**
@@ -35,33 +37,40 @@ class Pattern
             $results = call_user_func([$participle, 'run'], $sentence);
             $words = $words->merge($results);
         }
-        $words = collect($words)->where('tag', 't')->values();
+        $words = collect($words)->values();
 
-        $stacks = $words->pluck('word')->values();
         $result = [];
         $from = self::carbon();
         $to = self::carbon();
 
-        foreach ($stacks as $stack) {
-            $result[$stack] = self::try($stack, $from, $to);
+        foreach ($words as $item) {
+            $stack = $item['word'];
+            if ($item['tag'] != 't') {
+                $result[] = [
+                    'statement' => $stack,
+                    'results' => [],
+                ];
+            }
+            /**
+             * @var ResultObject[]
+             */
+            $results = [];
+            self::try($stack, $from, $to, $results);
+
+            $result[] = [
+                'statement' => $stack,
+                'results' => $results,
+            ];
         }
         return $result;
     }
 
-    public static function try($sentence, $from, $to)
+    public static function try($sentence, &$from, &$to, &$results)
     {
-        /**
-         * @var ResultObject[]
-         */
-        $results = [];
-        foreach (self::$rules as $rule_class) {
-            /**
-             * @var RuleInterface $rule
-             */
-            $rule = new $rule_class;
-            $results = array_merge($results, $rule->try($sentence, $from, $to));
-        }
-
-        return $results;
+        return (new Pipeline(app()))
+            ->send([$sentence, &$from, &$to, &$results])
+            ->through(self::$rules)
+            ->via('try')
+            ->thenReturn();
     }
 }

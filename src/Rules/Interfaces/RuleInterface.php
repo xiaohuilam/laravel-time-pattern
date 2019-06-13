@@ -8,13 +8,12 @@ interface RuleInterface
     /**
      * 分析
      *
-     * @param string $sentense
-     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
-     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     * @param array|Carbon[]|string[] $parameters
+     * @param Closure $next
      *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense, $from, $to);
+    public function try($parameters, $next);
 
     /**
      * 返回carbon对象

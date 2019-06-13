@@ -50,18 +50,18 @@ class SubDayRule extends AbstractRule implements RuleInterface
     /**
      * 分析
      *
-     * @param string $sentense
-     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $from
-     * @param \Xiaohuilam\LaravelTimePattern\Date\Carbon $to
+     * @param array|Carbon[]|string[] $parameters
+     * @param Closure $next
      *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($sentense, $from, $to)
+    public function try($parameters, $next)
     {
         /**
-         * @var $results \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
+         * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results
          */
-        $results = [];
+        list($sentense, &$from, &$to, &$results) = $parameters;
+
         foreach ($this->parterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
@@ -85,9 +85,9 @@ class SubDayRule extends AbstractRule implements RuleInterface
 
                 $mat = new ResultObject($from, $to);
                 $results = array_merge($results, [$mat]);
-                return $results;
+                return $next($parameters);
             }
         }
-        return $results;
+        return $next($parameters);
     }
 }
