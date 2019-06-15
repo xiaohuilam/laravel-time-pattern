@@ -23,6 +23,7 @@ class SubDayRule extends AbstractRule implements RuleInterface
         '/noon/i' => ['11-13'],
         '/晚上/i' => ['17-22'],
         '/今晚/i' => ['17-22'],
+        '/今天晚上/i' => ['17-22'],
         '/傍晚/i' => ['17-20'],
         '/tonight/i' => ['17-22'],
         '/this night/i' => ['17-22'],
@@ -35,16 +36,24 @@ class SubDayRule extends AbstractRule implements RuleInterface
         '/dawn/i' => ['0-4'],
 
         '/昨晚/i' => ['17-22', '-1 days'],
+        '/昨天晚上/i' => ['17-22', '-1 days'],
         '/last night/i' => ['17-22', '-1 days'],
         '/yesterday night/i' => ['17-22', '-1 days'],
 
         '/昨早/i' => ['6-9', '-1 days'],
+        '/昨天早上/i' => ['6-9', '-1 days'],
         '/last morning/i' => ['6-9', '-1 days'],
         '/yesterday morning/i' => ['6-9', '-1 days'],
 
         '/明晚/i' => ['17-22', '+1 days'],
+        '/明天晚上/i' => ['17-22', '+1 days'],
         '/tomorrow night/i' => ['17-22', '+1 days'],
         '/next night/i' => ['17-22', '+1 days'],
+
+        '/明早/i' => ['6-9', '+1 days'],
+        '/明天早上/i' => ['6-9', '+1 days'],
+        '/tomorrow morning/i' => ['6-9', '+1 days'],
+        '/next morning/i' => ['6-9', '+1 days'],
     ];
 
     /**
