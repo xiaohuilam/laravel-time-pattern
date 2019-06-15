@@ -52,8 +52,8 @@ class Pattern
             ->send([&$from, &$to, &$ret, &$stack])
             ->through($words)
             ->via('parse')
-            ->then(function ($ret) {
-                return $ret;
+            ->then(function ($passable) {
+                return $passable[2];
             });
     }
 
@@ -63,8 +63,8 @@ class Pattern
             ->send([$sentence, &$from, &$to, &$results, &$stack])
             ->through(self::$rules)
             ->via('parse')
-            ->then(function ($ret) {
-                return $ret;
+            ->then(function ($passable) {
+                return $passable[2];
             });
     }
 }
