@@ -52,7 +52,9 @@ class Pattern
             ->send([&$from, &$to, &$ret, &$stack])
             ->through($words)
             ->via('parse')
-            ->thenReturn();
+            ->then(function ($ret) {
+                return $ret;
+            });
     }
 
     public static function try($sentence, &$from, &$to, &$results, &$stack)
@@ -61,6 +63,8 @@ class Pattern
             ->send([$sentence, &$from, &$to, &$results, &$stack])
             ->through(self::$rules)
             ->via('parse')
-            ->thenReturn();
+            ->then(function ($ret) {
+                return $ret;
+            });
     }
 }
