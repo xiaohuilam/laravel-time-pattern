@@ -12,13 +12,13 @@ class Pattern
     /**
      * @var RuleInterface[]
      */
-    public static $rules = [
+    public static $rules =[
         Rules\StandardRule::class,
         Rules\SubMonthRule::class,
         Rules\MonthRule::class,
+        Rules\SubDayRule::class,
         Rules\DayRule::class,
         Rules\WeekRule::class,
-        Rules\SubDayRule::class,
         Rules\HourRule::class,
         Rules\YearRule::class,
     ];

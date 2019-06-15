@@ -13,28 +13,6 @@ class SubDayRule extends AbstractRule implements RuleInterface
      * @var array
      */
     protected $parterns = [
-        '/早上/i' => ['6-9'],
-        '/morning/i' => ['6-9'],
-        '/上午/i' => ['8-11'],
-        '/中午/i' => ['11-13'],
-        '/晌午/i' => ['11-13'],
-        '/下午/i' => ['13-17'],
-        '/afternoon/i' => ['13-17'],
-        '/noon/i' => ['11-13'],
-        '/晚上/i' => ['17-22'],
-        '/今晚/i' => ['17-22'],
-        '/今天晚上/i' => ['17-22'],
-        '/傍晚/i' => ['17-20'],
-        '/tonight/i' => ['17-22'],
-        '/this night/i' => ['17-22'],
-        '/深夜/i' => ['22-24'],
-        '/middle night/i' => ['22-24'],
-        '/mid night/i' => ['22-24'],
-        '/半夜/i' => ['22-24'],
-        '/夜/i' => ['17-24'],
-        '/凌晨/i' => ['0-4'],
-        '/dawn/i' => ['0-4'],
-
         '/昨晚/i' => ['17-22', '-1 days'],
         '/昨天晚上/i' => ['17-22', '-1 days'],
         '/last night/i' => ['17-22', '-1 days'],
@@ -54,6 +32,28 @@ class SubDayRule extends AbstractRule implements RuleInterface
         '/明天早上/i' => ['6-9', '+1 days'],
         '/tomorrow morning/i' => ['6-9', '+1 days'],
         '/next morning/i' => ['6-9', '+1 days'],
+
+        '/早上/i' => ['6-9'],
+        '/morning/i' => ['6-9'],
+        '/上午/i' => ['8-11'],
+        '/中午/i' => ['11-13'],
+        '/晌午/i' => ['11-13'],
+        '/下午/i' => ['13-17'],
+        '/afternoon/i' => ['13-17'],
+        '/noon/i' => ['11-13'],
+        '/今晚/i' => ['17-22'],
+        '/今天晚上/i' => ['17-22'],
+        '/晚上/i' => ['17-22'],
+        '/傍晚/i' => ['17-20'],
+        '/tonight/i' => ['17-22'],
+        '/this night/i' => ['17-22'],
+        '/深夜/i' => ['22-24'],
+        '/middle night/i' => ['22-24'],
+        '/mid night/i' => ['22-24'],
+        '/半夜/i' => ['22-24'],
+        '/夜/i' => ['17-24'],
+        '/凌晨/i' => ['0-4'],
+        '/dawn/i' => ['0-4'],
     ];
 
     /**
@@ -80,18 +80,19 @@ class SubDayRule extends AbstractRule implements RuleInterface
                 $carbon = self::carbon();
 
                 list($start, $end) = explode('-', $matches_into[0]);
+                $from->set('hour', $start);
+                $to->set('hour', $end);
+
                 if (isset($matches_into[1])) {
                     $carbon = $carbon->parse($matches_into[1]);
 
-                    $from = $from->set('year', $carbon->year);
-                    $from = $from->set('month', $carbon->month);
-                    $from = $from->set('day', $carbon->day);
-                    $to = $to->set('year', $carbon->year);
-                    $to = $to->set('month', $carbon->month);
-                    $to = $to->set('day', $carbon->day);
+                    $from->set('year', $carbon->year);
+                    $from->set('month', $carbon->month);
+                    $from->set('day', $carbon->day);
+                    $to->set('year', $carbon->year);
+                    $to->set('month', $carbon->month);
+                    $to->set('day', $carbon->day);
                 }
-                $from = $from->set('hour', $carbon->hour);
-                $to = $to->set('hour', $carbon->hour);
 
                 $mat = new ResultObject($from, $to);
                 /**
