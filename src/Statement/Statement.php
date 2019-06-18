@@ -41,9 +41,9 @@ class Statement
 
         if ($this->statement['tag'] == 't') {
             /**
-             * @var ResultObject[] $results
+             * @var ResultObject[]|\Illuminate\Support\Collection $results
              */
-            $results = [];
+            $results = collect([]);
             Pattern::try($this->statement['word'], $from, $to, $results, $stack);
 
             $ret[] = [
@@ -52,7 +52,10 @@ class Statement
                 'results' => $results,
             ];
 
-            $stack = array_merge($stack, $results);
+            foreach ($results as $item) {
+                $stack->push($item);
+            }
+            //$stack = array_merge($stack, $results);
         } else {
             $ret[] = [
                 'statement' => $this->statement['word'],

@@ -41,9 +41,9 @@ class Pattern
         $from = self::carbon();
         $to = self::carbon();
 
-        $ret = [];
+        $ret = collect([]);
 
-        $stack = [];
+        $stack = collect([]);
 
         //dd($words->take(3), $words);
         $words = $words->toArray();

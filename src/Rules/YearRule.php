@@ -60,7 +60,7 @@ class YearRule extends AbstractRule implements RuleInterface
                 /**
                  * @var ResultObject $last
                  */
-                $last = last($stack);
+                $last = $stack->last();
                 if ($last && $mat->from === $from && $mat->to === $to && $last->isWideThan($mat)) {
                     $from_new = $from->copy();
                     $to_new = $to->copy();
@@ -71,7 +71,7 @@ class YearRule extends AbstractRule implements RuleInterface
                     $stack[] = $mat;
                     goto redo;
                 }
-                $results = array_merge($results, [$mat]);
+                $results->push($mat);
                 return $next($parameters);
             }
         }
