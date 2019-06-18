@@ -102,7 +102,7 @@ class MonthRule extends AbstractRule implements RuleInterface
         /**
          * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results
          */
-        list($sentense, &$from, &$to, &$results, &$stack) = $parameters;
+        list($sentense, $from, $to, $results, $stack) = $parameters;
 
         foreach ($this->parterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);

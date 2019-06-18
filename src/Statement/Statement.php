@@ -37,7 +37,7 @@ class Statement
          * @var array $ret
          * @var ResultObject[] $stack
          */
-        list(&$from, &$to, &$ret, &$stack) = $parameters;
+        list($from, $to, $ret, $stack) = $parameters;
 
         if ($this->statement['tag'] == 't') {
             /**
