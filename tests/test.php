@@ -3,7 +3,7 @@ use Xiaohuilam\LaravelTimePattern\Pattern;
 
 require __DIR__ . '/boot.php';
 
-dd(Pattern::parse('2017/07/11-2019/08/01'));
+dump(Pattern::parse('2017/07/11-2019/08/01'));
 dump(Pattern::parse('07/11-08/01'));
 dump(Pattern::parse('12/1'));
 dump(Pattern::parse('下周'));
