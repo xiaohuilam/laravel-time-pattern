@@ -12,6 +12,10 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
     const SPLIT = '#<!----';
 
     protected static $rules =[
+        // YYYY/mm/dd-YYYY/mm/dd
+        '/([\d]{4})[\W\:^\ ^-]([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})\-([\d]{4})[\W\:^\ ^-]([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})/',
+        // mm/dd-mm/dd
+        '/([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})\-([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})/',
         // YYYY.mm
         '/([\d]{4})[\W\:^\ ]([\d]{1,2})/',
         // YYYY年mm月
@@ -34,6 +38,8 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
         '/[一二三四五六七八九十]{1,6}(日|号)(早晨|早上|上午|中午|晌午|下午|傍晚|夜晚|晚上|深夜|子夜|凌晨|清晨)/',
         '/[一二三四五六七八九十]{1,6}(日|号)/',
         '/(这|过)(两|三|四|五|六|七|几|些)天/',
+        // mm.dd
+        '/([\d]{1,2})[\W\:^\ ]([\d]{1,2})/',
     ];
 
     /**

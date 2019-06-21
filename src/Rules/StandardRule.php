@@ -12,7 +12,7 @@ class StandardRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         // YYYY-mm-dd HH:ii:ss
         '/([\d]{4})[\W^\:^\ ]{1,4}([\d]{1,2})[\W^\:^\ ]{1,4}([\d]{1,2}) ([\d]{1,2})\:([\d]{1,2})\:([\d]{1,2})/' => ['year', 'month', 'day', 'hour', 'minute', 'second'],
         // YYYY-mm-dd HH:ii
@@ -47,7 +47,7 @@ class StandardRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

@@ -12,7 +12,7 @@ class SubMonthRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/上旬/i' => ['1-10'],
         '/中旬/i' => ['11-20'],
         '/下旬/i' => ['21-31'],
@@ -190,7 +190,7 @@ class SubMonthRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

@@ -11,7 +11,7 @@ class MonthRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/本月今天/i' => ['create' => '+0month', 'sets' => ['month',],],
         '/本月今日/i' => ['create' => '+0month', 'sets' => ['month',],],
         '/上上月今天/i' => ['create' => '-2month', 'sets' => ['month',],],
@@ -104,7 +104,7 @@ class MonthRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

@@ -11,7 +11,7 @@ class DayRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/今天/i' => ['create' => 'today', 'sets' => ['year', 'month', 'day',]],
         '/今日/i' => ['create' => 'today', 'sets' => ['year', 'month', 'day',]],
         '/today/i' => ['create' => 'today', 'sets' => ['year', 'month', 'day',]],
@@ -54,7 +54,7 @@ class DayRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

@@ -11,7 +11,7 @@ class HourRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/([十一二三四五六七八九\d]{1,2})点整/i' => ['create' => '2019-01-01 00:00:00', 'sets' => ['minute',]],
         '/([十一二三四五六七八九\d]{1,2})点半/i' => ['create' => '2019-01-01 00:30:00', 'sets' => ['minute',]],
     ];
@@ -31,7 +31,7 @@ class HourRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

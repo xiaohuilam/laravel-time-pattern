@@ -12,7 +12,8 @@ class Pattern
     /**
      * @var RuleInterface[]
      */
-    public static $rules =[
+    public static $rules = [
+        Rules\DayRangeRule::class,
         Rules\StandardRule::class,
         Rules\SubMonthRule::class,
         Rules\MonthRule::class,

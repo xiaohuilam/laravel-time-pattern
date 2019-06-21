@@ -3,8 +3,10 @@ namespace Xiaohuilam\LaravelTimePattern\Rules;
 
 use Xiaohuilam\LaravelTimePattern\Result\ResultObject;
 use Xiaohuilam\LaravelTimePattern\Rules\Interfaces\RuleInterface;
+use Illuminate\Support\Str;
+use Xiaohuilam\LaravelTimePattern\Date\Carbon;
 
-class YearRule extends AbstractRule implements RuleInterface
+class DayRangeRule extends AbstractRule implements RuleInterface
 {
     /**
      * 顺序敏感
@@ -12,18 +14,10 @@ class YearRule extends AbstractRule implements RuleInterface
      * @var array
      */
     protected $patterns = [
-        '/今年/i' => ['create' => '+0year', 'sets' => ['year',],],
-        '/明年/i' => ['create' => '+1year', 'sets' => ['year',],],
-        '/一年后/i' => ['create' => '+1year', 'sets' => ['year',],],
-        '/两年后/i' => ['create' => '+2year', 'sets' => ['year',],],
-        '/三年后/i' => ['create' => '+3year', 'sets' => ['year',],],
-        '/前年/i' => ['create' => '-2year', 'sets' => ['year',],],
-        '/后年/i' => ['create' => '+2year', 'sets' => ['year',],],
-        '/一年前/i' => ['create' => '-1year', 'sets' => ['year',],],
-        '/两年前/i' => ['create' => '-2year', 'sets' => ['year',],],
-        '/三年前/i' => ['create' => '-3year', 'sets' => ['year',],],
-        '/去年/i' => ['create' => '-1year', 'sets' => ['year',],],
+        '/([\d]{4})[\W\:^\ ^-]([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})\-([\d]{4})[\W\:^\ ^-]([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})/' => ['from_year', 'from_month', 'from_day', 'to_year', 'to_month', 'to_day',],
+        '/([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})\-([\d]{1,2})[\W\:^\ ^-]([\d]{1,2})/' => ['from_month', 'from_day', 'to_month', 'to_day',],
     ];
+
 
     /**
      * 分析
@@ -46,17 +40,24 @@ class YearRule extends AbstractRule implements RuleInterface
                 continue;
             } else {
                 redo:
-                $from = $from->parse($matches_into['create']);
-                foreach ($matches_into['sets'] as $set) {
-                    $from = $from->set($set, $from->{$set});
+
+                $carbon_from = Carbon::now();
+                $carbon_to = Carbon::now();
+                foreach ($matches_into as $i => $attr) {
+                    if (Str::startsWith($attr, 'from_')) {
+                        $set = str_replace('from_', '', $attr);
+                        $carbon_from->set($set, $ret[$i + 1]);
+                    } else if (Str::startsWith($attr, 'to_')) {
+                        $set = str_replace('to_', '', $attr);
+                        $carbon_to->set($set, $ret[$i + 1]);
+                    }
                 }
-                $to = $to->parse($matches_into['create']);
-                foreach ($matches_into['sets'] as $set) {
-                    $to = $to->set($set, $to->{$set});
+                foreach ($carbon_from->getSets() as $set) {
+                    $from = $from->set($set, $carbon_from->{$set});
+                    $to = $to->set($set, $carbon_to->{$set});
                 }
 
                 $mat = new ResultObject($from, $to);
-
                 /**
                  * @var ResultObject $last
                  */

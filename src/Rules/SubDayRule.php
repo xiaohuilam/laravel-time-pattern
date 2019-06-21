@@ -12,7 +12,7 @@ class SubDayRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/昨晚/i' => ['17-22', '-1 days'],
         '/昨天晚上/i' => ['17-22', '-1 days'],
         '/last night/i' => ['17-22', '-1 days'],
@@ -71,7 +71,7 @@ class SubDayRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;

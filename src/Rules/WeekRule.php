@@ -11,7 +11,7 @@ class WeekRule extends AbstractRule implements RuleInterface
      *
      * @var array
      */
-    protected $parterns = [
+    protected $patterns = [
         '/本周/i' => ['create' => 'this week', 'sets' => ['year', 'month', 'day',]],
         '/上周/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],
         '/下周/i' => ['create' => '+1 week', 'sets' => ['year', 'month', 'day',]],
@@ -36,7 +36,7 @@ class WeekRule extends AbstractRule implements RuleInterface
          */
         list($sentense, $from, $to, $results, $stack) = $parameters;
 
-        foreach ($this->parterns as $regex => $matches_into) {
+        foreach ($this->patterns as $regex => $matches_into) {
             preg_match($regex, $sentense, $ret);
             if (!count($ret)) {
                 continue;
