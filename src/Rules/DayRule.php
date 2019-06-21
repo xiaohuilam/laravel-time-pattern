@@ -47,7 +47,7 @@ class DayRule extends AbstractRule implements RuleInterface
      *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($parameters, $next)
+    public function process($parameters, $next)
     {
         /**
          * @var \Xiaohuilam\LaravelTimePattern\Result\ResultObject[] $results

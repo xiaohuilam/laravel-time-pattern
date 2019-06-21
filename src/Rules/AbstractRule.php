@@ -18,7 +18,7 @@ abstract class AbstractRule
     public function parse($parameters, $next)
     {
         //dump($parameters[0], static::class);
-        return $this->try($parameters, $next);
+        return $this->process($parameters, $next);
     }
 }
 

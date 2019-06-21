@@ -44,7 +44,7 @@ class Statement
              * @var ResultObject[]|\Illuminate\Support\Collection $results
              */
             $results = collect([]);
-            Pattern::try($this->statement['word'], $from, $to, $results, $stack);
+            Pattern::process($this->statement['word'], $from, $to, $results, $stack);
 
             $ret[] = [
                 'statement' => $this->statement['word'],

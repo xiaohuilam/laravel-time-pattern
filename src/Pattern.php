@@ -57,7 +57,7 @@ class Pattern
             });
     }
 
-    public static function try($sentence, &$from, &$to, &$results, &$stack)
+    public static function process($sentence, &$from, &$to, &$results, &$stack)
     {
         return (new Pipeline(app()))
             ->send([$sentence, &$from, &$to, &$results, &$stack])

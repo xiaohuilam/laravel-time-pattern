@@ -13,7 +13,7 @@ interface RuleInterface
      *
      * @return \Xiaohuilam\LaravelTimePattern\Result\ResultObject[]
      */
-    public function try($parameters, $next);
+    public function process($parameters, $next);
 
     /**
      * 返回carbon对象
