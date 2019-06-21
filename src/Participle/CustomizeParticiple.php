@@ -50,8 +50,11 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
                 return self::SPLIT . base64_encode($a[0]) . self::SPLIT;
             };
         })->toArray();
-        $result = preg_replace_callback_array($rules, $sentence, -1);
-        $results = explode(self::SPLIT, $result);
+        foreach ($rules as $rule => $callback) {
+            $sentence = preg_replace_callback($rule, $callback, $sentence);
+        }
+
+        $results = explode(self::SPLIT, $sentence);
         $results = collect($results)->map(function ($word) {
             $decoded = base64_decode($word);
             if (!$decoded) {
