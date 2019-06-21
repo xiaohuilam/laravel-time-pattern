@@ -43,10 +43,10 @@ class WeekRule extends AbstractRule implements RuleInterface
             } else {
                 redo:
                 $carbon = self::carbon()->parse($matches_into['create']);
-                $from = $from->set('month', $carbon->copy()->firstOfMonth()->month);
-                $from = $from->set('day', $carbon->copy()->firstOfMonth()->day);
-                $to = $to->set('month', $carbon->copy()->endOfMonth()->month);
-                $to = $to->set('day', $carbon->copy()->endOfMonth()->day);
+                $from = $from->set('month', $carbon->copy()->startOfWeek()->month);
+                $from = $from->set('day', $carbon->copy()->startOfWeek()->day);
+                $to = $to->set('month', $carbon->copy()->endOfWeek()->month);
+                $to = $to->set('day', $carbon->copy()->endOfWeek()->day);
 
                 $mat = new ResultObject($from, $to);
 

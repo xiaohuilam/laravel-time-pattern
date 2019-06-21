@@ -2,6 +2,7 @@
 use Xiaohuilam\LaravelTimePattern\Pattern;
 
 require __DIR__ . '/boot.php';
+dd(Pattern::parse('6月29日中午考试')); // x
 dump(Pattern::parse('在2020.1前，上海要率先实现垃圾分类。并的2021年12月前向全国推广成功经验。')); // x
 dump(Pattern::parse('在2020.1前，上海要率先实现垃圾分类')); // x
 dump(Pattern::parse('我一月吃了一月饼')); // √
