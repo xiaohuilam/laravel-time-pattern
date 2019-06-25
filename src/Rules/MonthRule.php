@@ -12,17 +12,14 @@ class MonthRule extends AbstractRule implements RuleInterface
      * @var array
      */
     protected $patterns = [
-        '/本月今天/i' => ['create' => '+0month', 'sets' => ['month',],],
-        '/本月今日/i' => ['create' => '+0month', 'sets' => ['month',],],
-        '/上上月今天/i' => ['create' => '-2month', 'sets' => ['month',],],
-        '/上上月今日/i' => ['create' => '-2month', 'sets' => ['month',],],
-        '/上月今天/i' => ['create' => '-1month', 'sets' => ['month',],],
-        '/上月今日/i' => ['create' => '-1month', 'sets' => ['month',],],
-        '/下下月今天/i' => ['create' => '+2month', 'sets' => ['month',],],
-        '/下下月今日/i' => ['create' => '+2month', 'sets' => ['month',],],
-        '/下月今天/i' => ['create' => '+1month', 'sets' => ['month',],],
-        '/下月今日/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/上上月/i' => ['create' => '-2month', 'sets' => ['month',],],
+        '/上月/i' => ['create' => '-1month', 'sets' => ['month',],],
+        '/上个月/i' => ['create' => '-1month', 'sets' => ['month',],],
         '/下个月/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/下下月/i' => ['create' => '+2month', 'sets' => ['month',],],
+        '/下下个月/i' => ['create' => '+2month', 'sets' => ['month',],],
+        '/下月/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/上月/i' => ['create' => '-1month', 'sets' => ['month',],],
         '/month before last month/i' => ['create' => '-2month', 'sets' => ['month',],],
         '/two months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
         '/2 months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
@@ -120,7 +117,7 @@ class MonthRule extends AbstractRule implements RuleInterface
                     $to = $to->set($set, $to->{$set});
                 }
 
-                $mat = new ResultObject($from, $to);
+                $mat = new ResultObject($from->startOfMonth(), $to->endOfMonth());
                 /**
                  * @var ResultObject $last
                  */
@@ -131,7 +128,7 @@ class MonthRule extends AbstractRule implements RuleInterface
 
                     $from = &$from_new;
                     $to = &$to_new;
-                    $mat = new ResultObject($from, $to);
+                    $mat = new ResultObject( $from->startOfMonth(), $to->endOfMonth());
                     $stack[] = $mat;
                     goto redo;
                 }

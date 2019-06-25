@@ -2,6 +2,7 @@
 use Xiaohuilam\LaravelTimePattern\Pattern;
 
 require __DIR__ . '/boot.php';
+dump(Pattern::parse('下下月'));
 dump(Pattern::parse('下下周')); // x
 dump(Pattern::parse('下个月')); // x
 dump(Pattern::parse('6月29日中午考试')); // x

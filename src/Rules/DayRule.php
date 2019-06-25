@@ -36,6 +36,16 @@ class DayRule extends AbstractRule implements RuleInterface
         '/in (one|1) day/i' => ['create' => '+1 days', 'sets' => ['year', 'month', 'day',]],
         '/the day after tomorrow/i' => ['create' => '+2 days', 'sets' => ['year', 'month', 'day',]],
         '/the day after next day/i' => ['create' => '+2 days', 'sets' => ['year', 'month', 'day',]],
+        '/本月今天/i' => ['create' => '+0month', 'sets' => ['year', 'month', 'day',],],
+        '/本月今日/i' => ['create' => '+0month', 'sets' => ['year', 'month', 'day',],],
+        '/上上月今天/i' => ['create' => '-2month', 'sets' => ['year', 'month', 'day',],],
+        '/上上月今日/i' => ['create' => '-2month', 'sets' => ['year', 'month', 'day',],],
+        '/上月今天/i' => ['create' => '-1month', 'sets' => ['year', 'month', 'day',],],
+        '/上月今日/i' => ['create' => '-1month', 'sets' => ['year', 'month', 'day',],],
+        '/下下月今天/i' => ['create' => '+2month', 'sets' => ['year', 'month', 'day',],],
+        '/下下月今日/i' => ['create' => '+2month', 'sets' => ['year', 'month', 'day',],],
+        '/下月今天/i' => ['create' => '+1month', 'sets' => ['year', 'month', 'day',],],
+        '/下月今日/i' => ['create' => '+1month', 'sets' => ['year', 'month', 'day',],],
     ];
 
 
