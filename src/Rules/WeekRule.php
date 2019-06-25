@@ -13,7 +13,9 @@ class WeekRule extends AbstractRule implements RuleInterface
      */
     protected $patterns = [
         '/本周/i' => ['create' => 'this week', 'sets' => ['year', 'month', 'day',]],
+        '/上上周/i' => ['create' => '-2 week', 'sets' => ['year', 'month', 'day',]],
         '/上周/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],
+        '/下下周/i' => ['create' => '+2 week', 'sets' => ['year', 'month', 'day',]],
         '/下周/i' => ['create' => '+1 week', 'sets' => ['year', 'month', 'day',]],
         '/this week/i' => ['create' => 'this week', 'sets' => ['year', 'month', 'day',]],
         '/last week/i' => ['create' => '-1 week', 'sets' => ['year', 'month', 'day',]],

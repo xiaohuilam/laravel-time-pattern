@@ -22,6 +22,7 @@ class MonthRule extends AbstractRule implements RuleInterface
         '/下下月今日/i' => ['create' => '+2month', 'sets' => ['month',],],
         '/下月今天/i' => ['create' => '+1month', 'sets' => ['month',],],
         '/下月今日/i' => ['create' => '+1month', 'sets' => ['month',],],
+        '/下个月/i' => ['create' => '+1month', 'sets' => ['month',],],
         '/month before last month/i' => ['create' => '-2month', 'sets' => ['month',],],
         '/two months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
         '/2 months ago/i' => ['create' => '-2month', 'sets' => ['month',],],
