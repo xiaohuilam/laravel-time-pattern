@@ -23,6 +23,7 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
         // YYYY年mm月dd日
         '/([\d]{4})年([\d]{1,2})月([\d]{1,2})(日|日前)/',
         // dd号
+        '/([\d]{1,2}),([\d]{1,2})(号|日)/',
         '/([\d]{1,2})号/',
         '/[\d]{1,2}[\W^\:^\ ]{1,4}[\d]{1,2}[\W^\:^\ ]{1,4}20[\d]{2}/',
         '/20[\d]{2}[\W^\:^\ ]{1,4}[\d]{1,2}[\W^\:^\ ]{1,4}[\d]{1,2}/',
@@ -51,6 +52,8 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
      */
     public static function parts($sentence)
     {
+        $sentence = preg_replace('/[ ]{2,}/', ' ', $sentence);
+
         $results = collect([]);
         $rules = collect(self::$rules)->flip()->map(function ($nulled, $rule) {
             return function ($a) {
@@ -77,6 +80,7 @@ class CustomizeParticiple extends BaseParticiple implements ParticipleInterface
             ];
         });
 
+        dd($results);
         return $results;
     }
 }

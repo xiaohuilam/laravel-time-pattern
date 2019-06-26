@@ -2,6 +2,10 @@
 use Xiaohuilam\LaravelTimePattern\Pattern;
 
 require __DIR__ . '/boot.php';
+
+dump(Pattern::parse('8.1-8.4'));
+dump(Pattern::parse('下周月考'));
+dump(Pattern::parse('下周要请学生参加活动'));
 dump(Pattern::parse('下下月'));
 dump(Pattern::parse('下下周')); // x
 dump(Pattern::parse('下个月')); // x
